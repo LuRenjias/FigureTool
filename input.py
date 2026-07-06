@@ -105,18 +105,31 @@ MASK = MASK_COMPLETE
 
 # Optional keyword arguments passed to AttentionHeatmapPlotter.plot().
 ATTENTION_OPTIONS = {
+    # Figure title; use None to hide it.
     "title": "Attention",
+    # Color scale limits; None means infer the limit from ATTENTION_MATRIX.
+    "vmin": 0.06,
+    "vmax": 0.73,
+    # Whether to print matrix values inside cells.
     "annotate": True,
-    "show_colorbar": True,
-    # Zero-based (top, left, bottom, right) coordinates.
+    # Cells annotated when annotate=True. None or [] annotates all cells.
+    # Each region uses zero-based (top, left, bottom, right) coordinates.
+    "annotation_regions": None,
+    # Optional rectangular outlines, using the same region coordinates.
     "rectangle_regions": [],
+    # Draw the colorbar inside the attention figure.
+    "show_colorbar": True,
 }
 
 # Optional keyword arguments passed to TimeSeriesPlotter.plot().
 TIME_SERIES_OPTIONS = {
+    # Figure title; use None to hide it.
     "title": "Time series",
+    # Axis labels; plot_config.toml show_axis_labels controls visibility.
     "xlabel": "Time step",
     "ylabel": "Value",
+    # Standardize every variable independently within the input window.
     "standardize": False,
+    # Draw the legend inside the time-series figure.
     "legend": True,
 }
