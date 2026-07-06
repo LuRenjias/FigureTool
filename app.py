@@ -59,6 +59,16 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Write the attention colorbar to a separate file.",
     )
+    parser.add_argument(
+        "--attention-matrix-name",
+        default="ATTENTION_MATRIX",
+        help="Name of the attention-matrix variable in the input file.",
+    )
+    parser.add_argument(
+        "--mask-name",
+        default="MASK",
+        help="Name of the mask variable in the input file.",
+    )
     return parser
 
 
@@ -108,7 +118,8 @@ def main(argv: list[str] | None = None) -> int:
     time_series_filename = output_filename(
         args.time_series_filename, args.format
     )
-    attention_matrix = required(input_data, "ATTENTION_MATRIX")
+    attention_matrix = required(input_data, args.attention_matrix_name)
+    mask = required(input_data, args.mask_name)
     attention_plotter = AttentionHeatmapPlotter(config)
     if args.separate_attention_colorbar:
         attention_options["show_colorbar"] = False
@@ -139,7 +150,7 @@ def main(argv: list[str] | None = None) -> int:
         output_dir / time_series_filename,
         timestamps=getattr(input_data, "TIMESTAMPS", None),
         labels=labels,
-        mask=getattr(input_data, "MASK", None),
+        mask=mask,
         **time_series_options,
     )
     legend_path = None

@@ -84,4 +84,15 @@ conda run -n tslib python -m FigureTool.app \
 
 此时输出 `my_attention.svg` 和 `my_attention_colorbar.svg`。
 
+如果 `input.py` 定义了多组注意力矩阵和 mask，可以通过 Python 变量名选择：
+
+```bash
+conda run -n tslib python -m FigureTool.app \
+  --attention-matrix-name ATTENTION_MATRIX_MISSING \
+  --mask-name MASK_MISSING
+```
+
+默认读取 `ATTENTION_MATRIX` 和 `MASK`。指定名称不存在时程序会直接报错，
+避免静默使用错误的数据组合。
+
 也支持直接运行 `conda run -n tslib python FigureTool/app.py`。

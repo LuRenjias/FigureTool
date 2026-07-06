@@ -29,6 +29,9 @@ ATTENTION_MATRIX_MISSING = [
     [0.150, 0.130, 0.720],
 ]
 
+# app.py 未指定 --attention-matrix-name 时使用完整注意力矩阵。
+ATTENTION_MATRIX = ATTENTION_MATRIX_COMPLETE
+
 
 # ============================================================
 # 构造变量 1 和变量 2
@@ -58,11 +61,11 @@ left_boundary = variable_3[34]
 right_boundary = variable_3[65]
 valley_value = 3.0
 
-# 时间步 36—50：下降。
-variable_3[35:50] = np.linspace(left_boundary, valley_value, 15)
+# 时间步 36—45：下降。
+variable_3[35:45] = np.linspace(left_boundary, valley_value, 10)
 
-# 时间步 51—65：上升。
-variable_3[50:65] = np.linspace(valley_value, right_boundary, 15)
+# 时间步 46—65：上升。
+variable_3[45:65] = np.linspace(valley_value, right_boundary, 20)
 
 # 添加轻微、确定性的波动。
 variable_3 += 0.05 * np.sin(8.0 * np.pi * t)
@@ -96,6 +99,9 @@ MASK_COMPLETE = mask_array.tolist()
 mask_array[35:65, 2] = False
 
 MASK_MISSING = mask_array.tolist()
+
+# app.py 未指定 --mask-name 时使用完整 mask。
+MASK = MASK_COMPLETE
 
 # Optional keyword arguments passed to AttentionHeatmapPlotter.plot().
 ATTENTION_OPTIONS = {
