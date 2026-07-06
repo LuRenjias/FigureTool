@@ -36,6 +36,15 @@ def _number(
     return result
 
 
+def _integer(
+    section: Mapping[str, object], name: str, section_name: str
+) -> int:
+    value = _number(section, name, section_name)
+    if not value.is_integer():
+        raise ValueError(f"{section_name}.{name} must be an integer.")
+    return int(value)
+
+
 def _figsize(
     section: Mapping[str, object], name: str, section_name: str
 ) -> FigureSize:
@@ -100,6 +109,11 @@ class AttentionConfig:
     rectangle_linewidth: float
     show_axis_labels: bool
     colorbar_label: str
+    colorbar_figsize: FigureSize
+    colorbar_fraction: float
+    colorbar_pad: float
+    colorbar_tick_labelsize: float
+    colorbar_label_fontsize: float
 
     @classmethod
     def from_mapping(cls, section: Mapping[str, object]) -> "AttentionConfig":
@@ -123,6 +137,15 @@ class AttentionConfig:
                 section, "show_axis_labels", name, default=True
             ),
             colorbar_label=_text(section, "colorbar_label", name),
+            colorbar_figsize=_figsize(section, "colorbar_figsize", name),
+            colorbar_fraction=_number(section, "colorbar_fraction", name),
+            colorbar_pad=_number(section, "colorbar_pad", name),
+            colorbar_tick_labelsize=_number(
+                section, "colorbar_tick_labelsize", name
+            ),
+            colorbar_label_fontsize=_number(
+                section, "colorbar_label_fontsize", name
+            ),
         )
 
 
@@ -137,6 +160,9 @@ class TimeSeriesConfig:
     show_axis_labels: bool
     grid: bool
     colormap: str
+    legend_figsize: FigureSize
+    legend_fontsize: float
+    legend_columns: int
 
     @classmethod
     def from_mapping(cls, section: Mapping[str, object]) -> "TimeSeriesConfig":
@@ -153,6 +179,9 @@ class TimeSeriesConfig:
             ),
             grid=_boolean(section, "grid", name, default=True),
             colormap=_text(section, "colormap", name),
+            legend_figsize=_figsize(section, "legend_figsize", name),
+            legend_fontsize=_number(section, "legend_fontsize", name),
+            legend_columns=_integer(section, "legend_columns", name),
         )
 
 

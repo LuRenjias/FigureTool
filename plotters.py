@@ -125,8 +125,19 @@ class AttentionHeatmapPlotter:
                     ),
                 )
         if show_colorbar:
-            colorbar = figure.colorbar(image, ax=axis, fraction=0.046, pad=0.04)
-            colorbar.set_label(settings.colorbar_label)
+            colorbar = figure.colorbar(
+                image,
+                ax=axis,
+                fraction=settings.colorbar_fraction,
+                pad=settings.colorbar_pad,
+            )
+            colorbar.ax.tick_params(
+                labelsize=settings.colorbar_tick_labelsize
+            )
+            colorbar.set_label(
+                settings.colorbar_label,
+                fontsize=settings.colorbar_label_fontsize,
+            )
         try:
             return FigureSaver.save(
                 figure, output_path, dpi=self.config.dpi
@@ -157,13 +168,17 @@ class AttentionHeatmapPlotter:
             settings.colormap, "figure_tool_attention_colorbar"
         )
         normalization = mpl.colors.Normalize(vmin=lower, vmax=upper)
-        figure = plt.figure(figsize=(0.8, 6.0))
+        figure = plt.figure(figsize=settings.colorbar_figsize)
         axis = figure.add_axes((0.12, 0.04, 0.125, 0.92))
         colorbar = figure.colorbar(
             mpl.cm.ScalarMappable(norm=normalization, cmap=color_map),
             cax=axis,
         )
-        colorbar.set_label(settings.colorbar_label)
+        colorbar.ax.tick_params(labelsize=settings.colorbar_tick_labelsize)
+        colorbar.set_label(
+            settings.colorbar_label,
+            fontsize=settings.colorbar_label_fontsize,
+        )
         try:
             return FigureSaver.save(
                 figure, output_path, dpi=self.config.dpi
@@ -276,7 +291,10 @@ class TimeSeriesPlotter:
         if title:
             axis.set_title(title)
         if legend:
-            axis.legend(frameon=False)
+            axis.legend(
+                frameon=False,
+                fontsize=settings.legend_fontsize,
+            )
         try:
             return FigureSaver.save(
                 figure, output_path, dpi=self.config.dpi
@@ -302,7 +320,7 @@ class TimeSeriesPlotter:
                 f"time_series.colormap must be a listed colormap, got "
                 f"{settings.colormap!r}."
             ) from error
-        figure = plt.figure(figsize=(max(3.5, 1.6 * len(names)), 0.45))
+        figure = plt.figure(figsize=settings.legend_figsize)
         handles = [
             mpl.lines.Line2D(
                 [],
@@ -316,8 +334,9 @@ class TimeSeriesPlotter:
             handles,
             names,
             loc="center",
-            ncol=len(names),
+            ncol=min(settings.legend_columns, len(names)),
             frameon=False,
+            fontsize=settings.legend_fontsize,
             borderaxespad=0.0,
         )
         try:
