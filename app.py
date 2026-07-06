@@ -54,6 +54,11 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="Write the time-series legend to a separate file.",
     )
+    parser.add_argument(
+        "--separate-attention-colorbar",
+        action="store_true",
+        help="Write the attention colorbar to a separate file.",
+    )
     return parser
 
 
@@ -103,13 +108,29 @@ def main(argv: list[str] | None = None) -> int:
     time_series_filename = output_filename(
         args.time_series_filename, args.format
     )
-    attention_path = AttentionHeatmapPlotter(config).plot(
-        required(input_data, "ATTENTION_MATRIX"),
+    attention_matrix = required(input_data, "ATTENTION_MATRIX")
+    attention_plotter = AttentionHeatmapPlotter(config)
+    if args.separate_attention_colorbar:
+        attention_options["show_colorbar"] = False
+    attention_path = attention_plotter.plot(
+        attention_matrix,
         output_dir / attention_filename,
         row_labels=labels,
         column_labels=labels,
         **attention_options,
     )
+    colorbar_path = None
+    if args.separate_attention_colorbar:
+        attention_file = Path(attention_filename)
+        colorbar_filename = (
+            f"{attention_file.stem}_colorbar{attention_file.suffix}"
+        )
+        colorbar_path = attention_plotter.plot_colorbar(
+            attention_matrix,
+            output_dir / colorbar_filename,
+            vmin=attention_options.get("vmin"),
+            vmax=attention_options.get("vmax"),
+        )
     time_series_plotter = TimeSeriesPlotter(config)
     if args.separate_time_series_legend:
         time_series_options["legend"] = False
@@ -129,6 +150,8 @@ def main(argv: list[str] | None = None) -> int:
             labels, output_dir / legend_filename
         )
     print(f"Attention figure: {attention_path}")
+    if colorbar_path is not None:
+        print(f"Attention colorbar: {colorbar_path}")
     print(f"Time-series figure: {time_series_path}")
     if legend_path is not None:
         print(f"Time-series legend: {legend_path}")

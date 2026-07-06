@@ -134,6 +134,43 @@ class AttentionHeatmapPlotter:
         finally:
             plt.close(figure)
 
+    def plot_colorbar(
+        self,
+        matrix: object,
+        output_path: str | Path,
+        *,
+        vmin: float | None = None,
+        vmax: float | None = None,
+    ) -> Path:
+        """Draw only the vertical attention colorbar."""
+        values = finite_array(matrix, "matrix")
+        if values.ndim != 2:
+            raise ValueError("matrix must be two-dimensional.")
+        lower = float(values.min()) if vmin is None else float(vmin)
+        upper = float(values.max()) if vmax is None else float(vmax)
+        if not np.isfinite([lower, upper]).all() or lower >= upper:
+            raise ValueError("vmin and vmax must be finite and vmin < vmax.")
+
+        PlotStyle.configure()
+        settings = self.config.attention
+        color_map = PlotStyle.resolve_colormap(
+            settings.colormap, "figure_tool_attention_colorbar"
+        )
+        normalization = mpl.colors.Normalize(vmin=lower, vmax=upper)
+        figure = plt.figure(figsize=(0.8, 6.0))
+        axis = figure.add_axes((0.12, 0.04, 0.125, 0.92))
+        colorbar = figure.colorbar(
+            mpl.cm.ScalarMappable(norm=normalization, cmap=color_map),
+            cax=axis,
+        )
+        colorbar.set_label(settings.colorbar_label)
+        try:
+            return FigureSaver.save(
+                figure, output_path, dpi=self.config.dpi
+            )
+        finally:
+            plt.close(figure)
+
     @staticmethod
     def _labels(
         labels: Sequence[str] | None, size: int, name: str

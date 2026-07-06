@@ -73,4 +73,15 @@ conda run -n tslib python -m FigureTool.app \
 
 此时输出 `my_series.svg` 和 `my_series_legend.svg`。
 
+默认情况下 colorbar 位于注意力图内。使用
+`--separate-attention-colorbar` 可将其输出到单独文件：
+
+```bash
+conda run -n tslib python -m FigureTool.app \
+  --attention-filename my_attention.svg \
+  --separate-attention-colorbar
+```
+
+此时输出 `my_attention.svg` 和 `my_attention_colorbar.svg`。
+
 也支持直接运行 `conda run -n tslib python FigureTool/app.py`。
