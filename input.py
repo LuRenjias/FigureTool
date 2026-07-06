@@ -17,7 +17,13 @@ TIMESTAMPS = list(range(1, NUM_TIME_STEPS + 1))
 # 变量 3 与变量 1、2 关系较弱，主要关注自身。
 # 每一行之和均为 1。
 # ============================================================
-ATTENTION_MATRIX = [
+ATTENTION_MATRIX_COMPLETE = [
+    [0.36, 0.33, 0.31],
+    [0.32, 0.37, 0.31],
+    [0.31, 0.32, 0.37],
+]
+
+ATTENTION_MATRIX_MISSING = [
     [0.490, 0.450, 0.060],
     [0.440, 0.500, 0.060],
     [0.150, 0.130, 0.720],
@@ -84,10 +90,12 @@ TIME_SERIES_VALUES = np.round(time_series_array, 3).tolist()
 # ============================================================
 mask_array = np.ones((NUM_TIME_STEPS, 3), dtype=bool)
 
-# Python 索引 35:65 对应时间步 36—65。
-# mask_array[35:65, 2] = False
+MASK_COMPLETE = mask_array.tolist()
 
-MASK = mask_array.tolist()
+# Python 索引 35:65 对应时间步 36—65。
+mask_array[35:65, 2] = False
+
+MASK_MISSING = mask_array.tolist()
 
 # Optional keyword arguments passed to AttentionHeatmapPlotter.plot().
 ATTENTION_OPTIONS = {
