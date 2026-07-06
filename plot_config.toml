@@ -1,0 +1,36 @@
+[output]
+dpi = 300
+
+[attention]
+figsize = [5.4, 4.8]
+# 注意力色图支持两种写法：
+# 1. Matplotlib 色图名称，例如 "viridis"、"Blues"、"coolwarm"；
+# 2. 至少包含两种颜色的渐变列表，例如 ["black", "white"] 或
+#    ["#F7FBFF", "#6BAED6", "#08306B"]。
+# 在色图名称后添加 "_r" 可反转颜色顺序，例如 "Blues_r"。
+colormap = ["black", "white"]
+xlabel_fontsize = 14.0
+ylabel_fontsize = 14.0
+xtick_labelsize = 14.0
+ytick_labelsize = 14.0
+xtick_rotation = 30.0
+annotation_fontsize = 12.0
+# 矩形区域边框颜色，支持 Matplotlib 颜色名称或十六进制颜色值，
+# 例如 "red"、"cyan"、"#7BB392"。
+rectangle_edgecolor = "#7BB392"
+rectangle_linewidth = 2.4
+show_axis_labels = true
+colorbar_label = "Attention weight"
+
+[time_series]
+figsize = [5.4, 3.0]
+xlabel_fontsize = 14.0
+ylabel_fontsize = 14.0
+xtick_labelsize = 14.0
+ytick_labelsize = 14.0
+line_width = 1.5
+show_axis_labels = true
+grid = true
+# 时间序列各变量的离散配色方案，使用带颜色列表的 Matplotlib 色图，
+# 例如 "tab10"、"tab20"、"Set1"、"Set2" 或 "Dark2"。
+colormap = "tab10"
