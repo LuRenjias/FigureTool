@@ -106,6 +106,7 @@ class AttentionHeatmapPlotter:
                     fill=False,
                     edgecolor=settings.rectangle_edgecolor,
                     linewidth=settings.rectangle_linewidth,
+                    clip_on=False,
                 )
             )
 
