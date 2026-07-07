@@ -104,6 +104,8 @@ class AttentionConfig:
     title_fontsize: float
     xtick_labelsize: float
     ytick_labelsize: float
+    show_xticks: bool
+    show_yticks: bool
     xtick_rotation: float
     annotation_fontsize: float
     rectangle_edgecolor: str
@@ -127,6 +129,8 @@ class AttentionConfig:
             title_fontsize=_number(section, "title_fontsize", name),
             xtick_labelsize=_number(section, "xtick_labelsize", name),
             ytick_labelsize=_number(section, "ytick_labelsize", name),
+            show_xticks=_boolean(section, "show_xticks", name, default=True),
+            show_yticks=_boolean(section, "show_yticks", name, default=True),
             xtick_rotation=_number(
                 section, "xtick_rotation", name, positive=False
             ),
@@ -159,6 +163,8 @@ class TimeSeriesConfig:
     title_fontsize: float
     xtick_labelsize: float
     ytick_labelsize: float
+    show_xticks: bool
+    show_yticks: bool
     line_width: float
     show_axis_labels: bool
     grid: bool
@@ -177,6 +183,8 @@ class TimeSeriesConfig:
             title_fontsize=_number(section, "title_fontsize", name),
             xtick_labelsize=_number(section, "xtick_labelsize", name),
             ytick_labelsize=_number(section, "ytick_labelsize", name),
+            show_xticks=_boolean(section, "show_xticks", name, default=True),
+            show_yticks=_boolean(section, "show_yticks", name, default=True),
             line_width=_number(section, "line_width", name),
             show_axis_labels=_boolean(
                 section, "show_axis_labels", name, default=True

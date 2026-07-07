@@ -75,10 +75,18 @@ class AttentionHeatmapPlotter:
             rotation_mode="anchor",
         )
         axis.tick_params(
-            axis="x", length=0, labelsize=settings.xtick_labelsize
+            axis="x",
+            length=0,
+            labelsize=settings.xtick_labelsize,
+            bottom=settings.show_xticks,
+            labelbottom=settings.show_xticks,
         )
         axis.tick_params(
-            axis="y", length=0, labelsize=settings.ytick_labelsize
+            axis="y",
+            length=0,
+            labelsize=settings.ytick_labelsize,
+            left=settings.show_yticks,
+            labelleft=settings.show_yticks,
         )
         if settings.show_axis_labels:
             axis.set_xlabel("Key", fontsize=settings.xlabel_fontsize)
@@ -283,8 +291,18 @@ class TimeSeriesPlotter:
             axis.grid(axis="y", color="#B0B0B0", linewidth=0.5, alpha=0.3)
         axis.spines["top"].set_visible(False)
         axis.spines["right"].set_visible(False)
-        axis.tick_params(axis="x", labelsize=settings.xtick_labelsize)
-        axis.tick_params(axis="y", labelsize=settings.ytick_labelsize)
+        axis.tick_params(
+            axis="x",
+            labelsize=settings.xtick_labelsize,
+            bottom=settings.show_xticks,
+            labelbottom=settings.show_xticks,
+        )
+        axis.tick_params(
+            axis="y",
+            labelsize=settings.ytick_labelsize,
+            left=settings.show_yticks,
+            labelleft=settings.show_yticks,
+        )
         if settings.show_axis_labels:
             axis.set_xlabel(xlabel, fontsize=settings.xlabel_fontsize)
             axis.set_ylabel(ylabel, fontsize=settings.ylabel_fontsize)
