@@ -112,6 +112,7 @@ class AttentionConfig:
     rectangle_linewidth: float
     show_axis_labels: bool
     colorbar_label: str
+    show_colorbar_label: bool
     colorbar_figsize: FigureSize
     colorbar_fraction: float
     colorbar_pad: float
@@ -143,6 +144,9 @@ class AttentionConfig:
                 section, "show_axis_labels", name, default=True
             ),
             colorbar_label=_text(section, "colorbar_label", name),
+            show_colorbar_label=_boolean(
+                section, "show_colorbar_label", name, default=True
+            ),
             colorbar_figsize=_figsize(section, "colorbar_figsize", name),
             colorbar_fraction=_number(section, "colorbar_fraction", name),
             colorbar_pad=_number(section, "colorbar_pad", name),

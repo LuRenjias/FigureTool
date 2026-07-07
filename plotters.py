@@ -143,10 +143,11 @@ class AttentionHeatmapPlotter:
             colorbar.ax.tick_params(
                 labelsize=settings.colorbar_tick_labelsize
             )
-            colorbar.set_label(
-                settings.colorbar_label,
-                fontsize=settings.colorbar_label_fontsize,
-            )
+            if settings.show_colorbar_label:
+                colorbar.set_label(
+                    settings.colorbar_label,
+                    fontsize=settings.colorbar_label_fontsize,
+                )
         try:
             return FigureSaver.save(
                 figure, output_path, dpi=self.config.dpi
@@ -184,10 +185,11 @@ class AttentionHeatmapPlotter:
             cax=axis,
         )
         colorbar.ax.tick_params(labelsize=settings.colorbar_tick_labelsize)
-        colorbar.set_label(
-            settings.colorbar_label,
-            fontsize=settings.colorbar_label_fontsize,
-        )
+        if settings.show_colorbar_label:
+            colorbar.set_label(
+                settings.colorbar_label,
+                fontsize=settings.colorbar_label_fontsize,
+            )
         try:
             return FigureSaver.save(
                 figure, output_path, dpi=self.config.dpi

@@ -18,17 +18,18 @@ show_axis_labels = false
 xtick_rotation = 30.0
 annotation_fontsize = 14.0
 # 矩形区域边框颜色，支持 Matplotlib 颜色名称或十六进制颜色值，例如 "red"、"cyan"、"#7BB392"。
-rectangle_edgecolor = "#C2DDFC"
-rectangle_linewidth = 3.6
+rectangle_edgecolor = "#f1c40f"
+rectangle_linewidth = 6.0
 # colorbar_label 同时用于内嵌和独立 colorbar。
 colorbar_label = "Attention weight"
+show_colorbar_label = false
 # 独立 colorbar 的画布尺寸 [宽, 高]，单位为英寸。
 colorbar_figsize = [0.8, 6.0]
 # 内嵌 colorbar 相对主图的宽度比例及间距。
 colorbar_fraction = 0.046
 colorbar_pad = 0.04
 # 内嵌和独立 colorbar 的刻度字号及标题字号。
-colorbar_tick_labelsize = 10.0
+colorbar_tick_labelsize = 14.0
 colorbar_label_fontsize = 11.0
 
 [time_series]
@@ -42,7 +43,7 @@ show_xticks = false
 show_yticks = false
 show_axis_labels = false
 line_width = 1.5
-grid = false
+grid = true
 # 时间序列各变量的离散配色方案，使用带颜色列表的 Matplotlib 色图，例如 "tab10"、"tab20"、"Set1"、"Set2" 或 "Dark2"。
 colormap = "tab10"
 # 独立图例的画布尺寸 [宽, 高]，单位为英寸。
