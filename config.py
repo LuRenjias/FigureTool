@@ -101,6 +101,7 @@ class AttentionConfig:
     colormap: ColorMapSpec
     xlabel_fontsize: float
     ylabel_fontsize: float
+    title_fontsize: float
     xtick_labelsize: float
     ytick_labelsize: float
     xtick_rotation: float
@@ -123,6 +124,7 @@ class AttentionConfig:
             colormap=_colormap(section, "colormap", name),
             xlabel_fontsize=_number(section, "xlabel_fontsize", name),
             ylabel_fontsize=_number(section, "ylabel_fontsize", name),
+            title_fontsize=_number(section, "title_fontsize", name),
             xtick_labelsize=_number(section, "xtick_labelsize", name),
             ytick_labelsize=_number(section, "ytick_labelsize", name),
             xtick_rotation=_number(
@@ -154,6 +156,7 @@ class TimeSeriesConfig:
     figsize: FigureSize
     xlabel_fontsize: float
     ylabel_fontsize: float
+    title_fontsize: float
     xtick_labelsize: float
     ytick_labelsize: float
     line_width: float
@@ -171,6 +174,7 @@ class TimeSeriesConfig:
             figsize=_figsize(section, "figsize", name),
             xlabel_fontsize=_number(section, "xlabel_fontsize", name),
             ylabel_fontsize=_number(section, "ylabel_fontsize", name),
+            title_fontsize=_number(section, "title_fontsize", name),
             xtick_labelsize=_number(section, "xtick_labelsize", name),
             ytick_labelsize=_number(section, "ytick_labelsize", name),
             line_width=_number(section, "line_width", name),

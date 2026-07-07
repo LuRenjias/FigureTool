@@ -84,7 +84,7 @@ class AttentionHeatmapPlotter:
             axis.set_xlabel("Key", fontsize=settings.xlabel_fontsize)
             axis.set_ylabel("Query", fontsize=settings.ylabel_fontsize)
         if title:
-            axis.set_title(title)
+            axis.set_title(title, fontsize=settings.title_fontsize)
         for spine in axis.spines.values():
             spine.set_visible(False)
 
@@ -289,7 +289,7 @@ class TimeSeriesPlotter:
             axis.set_xlabel(xlabel, fontsize=settings.xlabel_fontsize)
             axis.set_ylabel(ylabel, fontsize=settings.ylabel_fontsize)
         if title:
-            axis.set_title(title)
+            axis.set_title(title, fontsize=settings.title_fontsize)
         if legend:
             axis.legend(
                 frameon=False,

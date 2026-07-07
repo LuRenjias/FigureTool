@@ -3,23 +3,22 @@ dpi = 300
 
 [attention]
 figsize = [5.4, 4.8]
+
 # 注意力色图支持两种写法：
-# 1. Matplotlib 色图名称，例如 "viridis"、"Blues"、"coolwarm"；
-# 2. 至少包含两种颜色的渐变列表，例如 ["black", "white"] 或
-#    ["#F7FBFF", "#6BAED6", "#08306B"]。
-# 在色图名称后添加 "_r" 可反转颜色顺序，例如 "Blues_r"。
-colormap = ["black", "white"]
+# 1. Matplotlib 色图名称，例如 "viridis", "plasma", "inferno", "magma", "cividis", "Blues", "YlOrRd", "coolwarm"，在色图名称后添加 "_r" 可反转颜色顺序，例如 "Blues_r"；
+# 2. 至少包含两种颜色的渐变列表，例如 ["black", "white"] 或 ["#F7FBFF", "#6BAED6", "#08306B"]。
+colormap = "magma"
 xlabel_fontsize = 14.0
 ylabel_fontsize = 14.0
+title_fontsize = 14.0
 xtick_labelsize = 14.0
 ytick_labelsize = 14.0
 xtick_rotation = 30.0
-annotation_fontsize = 12.0
-# 矩形区域边框颜色，支持 Matplotlib 颜色名称或十六进制颜色值，
-# 例如 "red"、"cyan"、"#7BB392"。
-rectangle_edgecolor = "#7BB392"
-rectangle_linewidth = 2.4
-show_axis_labels = true
+annotation_fontsize = 14.0
+# 矩形区域边框颜色，支持 Matplotlib 颜色名称或十六进制颜色值，例如 "red"、"cyan"、"#7BB392"。
+rectangle_edgecolor = "white"
+rectangle_linewidth = 3.6
+show_axis_labels = false
 # colorbar_label 同时用于内嵌和独立 colorbar。
 colorbar_label = "Attention weight"
 # 独立 colorbar 的画布尺寸 [宽, 高]，单位为英寸。
@@ -35,13 +34,13 @@ colorbar_label_fontsize = 11.0
 figsize = [5.4, 3.0]
 xlabel_fontsize = 14.0
 ylabel_fontsize = 14.0
+title_fontsize = 14.0
 xtick_labelsize = 14.0
 ytick_labelsize = 14.0
 line_width = 1.5
-show_axis_labels = true
-grid = true
-# 时间序列各变量的离散配色方案，使用带颜色列表的 Matplotlib 色图，
-# 例如 "tab10"、"tab20"、"Set1"、"Set2" 或 "Dark2"。
+show_axis_labels = false
+grid = false
+# 时间序列各变量的离散配色方案，使用带颜色列表的 Matplotlib 色图，例如 "tab10"、"tab20"、"Set1"、"Set2" 或 "Dark2"。
 colormap = "tab10"
 # 独立图例的画布尺寸 [宽, 高]，单位为英寸。
 legend_figsize = [5.4, 0.45]

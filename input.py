@@ -1,7 +1,7 @@
 """Edit this file, then run: python -m FigureTool.app"""
 
 # Variable order is shared by the attention matrix and time-series columns.
-VARIABLE_LABELS = ["Variable A", "Variable B", "Variable C"]
+VARIABLE_LABELS = ["V1", "V2", "V3"]
 
 import numpy as np
 
@@ -18,15 +18,15 @@ TIMESTAMPS = list(range(1, NUM_TIME_STEPS + 1))
 # 每一行之和均为 1。
 # ============================================================
 ATTENTION_MATRIX_COMPLETE = [
-    [0.36, 0.33, 0.31],
-    [0.32, 0.37, 0.31],
-    [0.31, 0.32, 0.37],
+    [0.45, 0.39, 0.16],
+    [0.37, 0.46, 0.17],
+    [0.18, 0.19, 0.63],
 ]
 
 ATTENTION_MATRIX_MISSING = [
-    [0.490, 0.450, 0.060],
-    [0.440, 0.500, 0.060],
-    [0.150, 0.130, 0.720],
+    [0.35, 0.32, 0.33],
+    [0.33, 0.36, 0.31],
+    [0.31, 0.35, 0.34],
 ]
 
 # app.py 未指定 --attention-matrix-name 时使用完整注意力矩阵。
@@ -108,15 +108,19 @@ ATTENTION_OPTIONS = {
     # Figure title; use None to hide it.
     "title": "Attention",
     # Color scale limits; None means infer the limit from ATTENTION_MATRIX.
-    "vmin": 0.06,
-    "vmax": 0.73,
+    "vmin": 0.1,
+    "vmax": 0.7,
     # Whether to print matrix values inside cells.
-    "annotate": True,
+    "annotate": False,
     # Cells annotated when annotate=True. None or [] annotates all cells.
     # Each region uses zero-based (top, left, bottom, right) coordinates.
+    # Example: [(0, 0, 1, 1)] annotates the upper-left 2x2 block.
+    # Example: [(0, 0, 0, 2), (2, 0, 2, 2)] annotates first and third rows.
     "annotation_regions": None,
     # Optional rectangular outlines, using the same region coordinates.
-    "rectangle_regions": [],
+    # Example: [(0, 0, 1, 1)] draws one rectangle around the upper-left 2x2 block.
+    # Example: [(0, 0, 0, 2), (2, 0, 2, 2)] draws rectangles around first and third rows.
+    "rectangle_regions": [(0, 2, 1, 2)],
     # Draw the colorbar inside the attention figure.
     "show_colorbar": True,
 }
