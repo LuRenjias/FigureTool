@@ -187,6 +187,8 @@ class TimeSeriesConfig:
     axis_arrow_mutation_scale: float
     line_width: float
     missing_mode: str
+    missing_dash_length: float
+    missing_gap_length: float
     show_axis_labels: bool
     grid: bool
     colormap: str
@@ -218,6 +220,12 @@ class TimeSeriesConfig:
             line_width=_number(section, "line_width", name),
             missing_mode=_choice(
                 section, "missing_mode", name, {"blank", "dashed"}
+            ),
+            missing_dash_length=_number(
+                section, "missing_dash_length", name
+            ),
+            missing_gap_length=_number(
+                section, "missing_gap_length", name
             ),
             show_axis_labels=_boolean(
                 section, "show_axis_labels", name, default=True

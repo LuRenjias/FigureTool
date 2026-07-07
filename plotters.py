@@ -299,7 +299,13 @@ class TimeSeriesPlotter:
                     ),
                     color=colors[index % len(colors)],
                     linewidth=settings.line_width,
-                    linestyle="--",
+                    linestyle=(
+                        0,
+                        (
+                            settings.missing_dash_length,
+                            settings.missing_gap_length,
+                        ),
+                    ),
                     label="_nolegend_",
                 )
         if settings.grid:
