@@ -16,9 +16,9 @@ show_xticks = false
 show_yticks = false
 show_axis_labels = false
 xtick_rotation = 30.0
-annotation_fontsize = 14.0
+annotation_fontsize = 25.0
 # 矩形区域边框颜色，支持 Matplotlib 颜色名称或十六进制颜色值，例如 "red"、"cyan"、"#7BB392"。
-rectangle_edgecolor = "#f1c40f"
+rectangle_edgecolor = "#91D941"
 rectangle_linewidth = 6.0
 # colorbar_label 同时用于内嵌和独立 colorbar。
 colorbar_label = "Attention weight"
@@ -44,9 +44,13 @@ show_yticks = false
 # 坐标轴箭头
 show_axis_arrows = true
 axis_arrow_linewidth = 1.0
+# 箭头头部大小
+axis_arrow_mutation_scale = 20.0
 show_axis_labels = false
 line_width = 1.5
-grid = true
+# 缺失位置绘制模式："blank" 保持空白；"dashed" 保留原形状并改为虚线。
+missing_mode = "dashed"
+grid = false
 # 时间序列各变量的离散配色方案，使用带颜色列表的 Matplotlib 色图，例如 "tab10"、"tab20"、"Set1"、"Set2" 或 "Dark2"。
 colormap = "tab10"
 # 独立图例的画布尺寸 [宽, 高]，单位为英寸。

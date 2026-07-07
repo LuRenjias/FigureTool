@@ -78,6 +78,19 @@ def _boolean(
     return value
 
 
+def _choice(
+    section: Mapping[str, object],
+    name: str,
+    section_name: str,
+    choices: set[str],
+) -> str:
+    value = _text(section, name, section_name)
+    if value not in choices:
+        expected = ", ".join(sorted(choices))
+        raise ValueError(f"{section_name}.{name} must be one of: {expected}.")
+    return value
+
+
 def _colormap(
     section: Mapping[str, object], name: str, section_name: str
 ) -> ColorMapSpec:
@@ -171,7 +184,9 @@ class TimeSeriesConfig:
     show_yticks: bool
     show_axis_arrows: bool
     axis_arrow_linewidth: float
+    axis_arrow_mutation_scale: float
     line_width: float
+    missing_mode: str
     show_axis_labels: bool
     grid: bool
     colormap: str
@@ -197,7 +212,13 @@ class TimeSeriesConfig:
             axis_arrow_linewidth=_number(
                 section, "axis_arrow_linewidth", name
             ),
+            axis_arrow_mutation_scale=_number(
+                section, "axis_arrow_mutation_scale", name
+            ),
             line_width=_number(section, "line_width", name),
+            missing_mode=_choice(
+                section, "missing_mode", name, {"blank", "dashed"}
+            ),
             show_axis_labels=_boolean(
                 section, "show_axis_labels", name, default=True
             ),

@@ -111,7 +111,7 @@ ATTENTION_OPTIONS = {
     "vmin": 0.1,
     "vmax": 0.7,
     # Whether to print matrix values inside cells.
-    "annotate": False,
+    "annotate": True,
     # Cells annotated when annotate=True. None or [] annotates all cells.
     # Each region uses zero-based (top, left, bottom, right) coordinates.
     # Example: [(0, 0, 1, 1)] annotates the upper-left 2x2 block.

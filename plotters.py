@@ -268,7 +268,8 @@ class TimeSeriesPlotter:
             scale = plotted.std(axis=0, keepdims=True)
             plotted = (plotted - mean) / np.maximum(scale, 1e-12)
             ylabel = f"Standardized {ylabel.lower()}"
-        plotted[~observed] = np.nan
+        visible = plotted.copy()
+        visible[~observed] = np.nan
 
         PlotStyle.configure()
         settings = self.config.time_series
@@ -285,11 +286,22 @@ class TimeSeriesPlotter:
         for index, name in enumerate(names):
             axis.plot(
                 x_values,
-                plotted[:, index],
+                visible[:, index],
                 color=colors[index % len(colors)],
                 linewidth=settings.line_width,
                 label=name,
             )
+            if settings.missing_mode == "dashed":
+                axis.plot(
+                    x_values,
+                    self._missing_segment_values(
+                        plotted[:, index], observed[:, index]
+                    ),
+                    color=colors[index % len(colors)],
+                    linewidth=settings.line_width,
+                    linestyle="--",
+                    label="_nolegend_",
+                )
         if settings.grid:
             axis.grid(axis="y", color="#B0B0B0", linewidth=0.5, alpha=0.3)
         axis.spines["top"].set_visible(False)
@@ -297,7 +309,11 @@ class TimeSeriesPlotter:
         if settings.show_axis_arrows:
             axis.spines["bottom"].set_visible(False)
             axis.spines["left"].set_visible(False)
-            self._add_axis_arrows(axis, settings.axis_arrow_linewidth)
+            self._add_axis_arrows(
+                axis,
+                settings.axis_arrow_linewidth,
+                settings.axis_arrow_mutation_scale,
+            )
         axis.tick_params(
             axis="x",
             labelsize=settings.xtick_labelsize,
@@ -328,12 +344,38 @@ class TimeSeriesPlotter:
             plt.close(figure)
 
     @staticmethod
-    def _add_axis_arrows(axis: plt.Axes, linewidth: float) -> None:
+    def _missing_segment_values(
+        values: np.ndarray, observed: np.ndarray
+    ) -> np.ndarray:
+        """Keep missing runs plus adjacent endpoints, and hide other values."""
+        result = np.full(values.shape, np.nan, dtype=float)
+        missing = ~observed
+        index = 0
+        while index < len(missing):
+            if not missing[index]:
+                index += 1
+                continue
+            start = index
+            while index < len(missing) and missing[index]:
+                index += 1
+            end = index - 1
+            segment_start = max(start - 1, 0)
+            segment_end = min(end + 1, len(missing) - 1)
+            result[segment_start : segment_end + 1] = values[
+                segment_start : segment_end + 1
+            ]
+        return result
+
+    @staticmethod
+    def _add_axis_arrows(
+        axis: plt.Axes, linewidth: float, mutation_scale: float
+    ) -> None:
         """Draw x/y axis arrows in axes coordinates."""
         arrowprops = {
             "arrowstyle": "->",
             "color": "black",
             "linewidth": linewidth,
+            "mutation_scale": mutation_scale,
             "shrinkA": 0,
             "shrinkB": 0,
         }
