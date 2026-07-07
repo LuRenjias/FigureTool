@@ -41,6 +41,9 @@ xtick_labelsize = 14.0
 ytick_labelsize = 14.0
 show_xticks = false
 show_yticks = false
+# 坐标轴箭头
+show_axis_arrows = true
+axis_arrow_linewidth = 1.0
 show_axis_labels = false
 line_width = 1.5
 grid = true

@@ -169,6 +169,8 @@ class TimeSeriesConfig:
     ytick_labelsize: float
     show_xticks: bool
     show_yticks: bool
+    show_axis_arrows: bool
+    axis_arrow_linewidth: float
     line_width: float
     show_axis_labels: bool
     grid: bool
@@ -189,6 +191,12 @@ class TimeSeriesConfig:
             ytick_labelsize=_number(section, "ytick_labelsize", name),
             show_xticks=_boolean(section, "show_xticks", name, default=True),
             show_yticks=_boolean(section, "show_yticks", name, default=True),
+            show_axis_arrows=_boolean(
+                section, "show_axis_arrows", name, default=True
+            ),
+            axis_arrow_linewidth=_number(
+                section, "axis_arrow_linewidth", name
+            ),
             line_width=_number(section, "line_width", name),
             show_axis_labels=_boolean(
                 section, "show_axis_labels", name, default=True

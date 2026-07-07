@@ -294,6 +294,10 @@ class TimeSeriesPlotter:
             axis.grid(axis="y", color="#B0B0B0", linewidth=0.5, alpha=0.3)
         axis.spines["top"].set_visible(False)
         axis.spines["right"].set_visible(False)
+        if settings.show_axis_arrows:
+            axis.spines["bottom"].set_visible(False)
+            axis.spines["left"].set_visible(False)
+            self._add_axis_arrows(axis, settings.axis_arrow_linewidth)
         axis.tick_params(
             axis="x",
             labelsize=settings.xtick_labelsize,
@@ -322,6 +326,41 @@ class TimeSeriesPlotter:
             )
         finally:
             plt.close(figure)
+
+    @staticmethod
+    def _add_axis_arrows(axis: plt.Axes, linewidth: float) -> None:
+        """Draw x/y axis arrows in axes coordinates."""
+        arrowprops = {
+            "arrowstyle": "->",
+            "color": "black",
+            "linewidth": linewidth,
+            "shrinkA": 0,
+            "shrinkB": 0,
+        }
+        x_arrow = axis.annotate(
+            "",
+            xy=(1.02, 0.0),
+            xytext=(0.0, 0.0),
+            xycoords="axes fraction",
+            textcoords="axes fraction",
+            arrowprops=arrowprops,
+            annotation_clip=False,
+        )
+        y_arrow = axis.annotate(
+            "",
+            xy=(0.0, 1.04),
+            xytext=(0.0, 0.0),
+            xycoords="axes fraction",
+            textcoords="axes fraction",
+            arrowprops=arrowprops,
+            annotation_clip=False,
+        )
+        x_arrow.set_clip_on(False)
+        y_arrow.set_clip_on(False)
+        if x_arrow.arrow_patch is not None:
+            x_arrow.arrow_patch.set_clip_on(False)
+        if y_arrow.arrow_patch is not None:
+            y_arrow.arrow_patch.set_clip_on(False)
 
     def plot_legend(
         self,
