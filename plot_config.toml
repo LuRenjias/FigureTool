@@ -3,7 +3,6 @@ dpi = 300
 
 [attention]
 figsize = [5.4, 4.8]
-
 # 注意力色图支持两种写法：
 # 1. Matplotlib 色图名称，例如 "viridis", "plasma", "inferno", "magma", "cividis", "Blues", "YlOrRd", "coolwarm"，在色图名称后添加 "_r" 可反转颜色顺序，例如 "Blues_r"；
 # 2. 至少包含两种颜色的渐变列表，例如 ["black", "white"] 或 ["#F7FBFF", "#6BAED6", "#08306B"]。

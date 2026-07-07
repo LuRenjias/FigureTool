@@ -106,7 +106,7 @@ MASK = MASK_COMPLETE
 # Optional keyword arguments passed to AttentionHeatmapPlotter.plot().
 ATTENTION_OPTIONS = {
     # Figure title; use None to hide it.
-    "title": "Attention",
+    "title": None,
     # Color scale limits; None means infer the limit from ATTENTION_MATRIX.
     "vmin": 0.1,
     "vmax": 0.7,
@@ -128,7 +128,7 @@ ATTENTION_OPTIONS = {
 # Optional keyword arguments passed to TimeSeriesPlotter.plot().
 TIME_SERIES_OPTIONS = {
     # Figure title; use None to hide it.
-    "title": "Time series",
+    "title": None,
     # Axis labels; plot_config.toml show_axis_labels controls visibility.
     "xlabel": "Time step",
     "ylabel": "Value",
