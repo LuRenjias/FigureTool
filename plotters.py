@@ -71,7 +71,7 @@ class AttentionHeatmapPlotter:
         plt.setp(
             axis.get_xticklabels(),
             rotation=settings.xtick_rotation,
-            ha="right",
+            ha="center",
             rotation_mode="anchor",
         )
         axis.tick_params(
