@@ -43,7 +43,7 @@ show_xticks = false
 show_yticks = false
 # 坐标轴箭头
 show_axis_arrows = true
-axis_arrow_linewidth = 1.0
+axis_arrow_linewidth = 1.5
 # 箭头头部大小
 axis_arrow_mutation_scale = 20.0
 show_axis_labels = false
